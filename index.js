@@ -10,10 +10,9 @@ const readFile = promisify(fs.readFile);
 
 app.use(cors());
 
-// console.log(`${data.length}`);
-
 app.get("/sendmail", async (req, res) => {
   try {
+    const email = "93siddhartha@gmail.com";
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -28,14 +27,15 @@ app.get("/sendmail", async (req, res) => {
     });
     // let email = `${data[i].NamsatyaM12321e.split(' ')[0].toLowerCase()}${data[i].roll_no}@akgec.ac.in`
     // let email = data[i];
-    // console.log(email);
+
     const mailOption = {
       from: "satyam1913196@akgec.ac.in",
-      to: "93siddhartha@gmail.com",
+      to: email,
       subject: "Satyam Resume",
-      html: await readFile("./index.html", "utf8"),
-      // html: "<h1>satyam</h1>",
+      html: await readFile("./satyam/index.html", { encoding: "utf-8" }),
     };
+
+    console.log(email);
 
     transporter.sendMail(mailOption, function (error, info) {
       if (error) {
@@ -47,7 +47,7 @@ app.get("/sendmail", async (req, res) => {
       }
     });
     console.log("mail sended");
-    res.send("send");
+    res.send(mailOption);
   } catch (error) {
     console.log(error);
     res.send(error);
