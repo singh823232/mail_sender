@@ -31,7 +31,7 @@ app.get("/sendmail", async (req, res) => {
     // console.log(email);
     const mailOption = {
       from: "satyam1913196@akgec.ac.in",
-      to: "singh823232@gmail.com",
+      to: "93siddhartha@gmail.com",
       subject: "Satyam Resume",
       html: await readFile("./index.html", "utf8"),
       // html: "<h1>satyam</h1>",
